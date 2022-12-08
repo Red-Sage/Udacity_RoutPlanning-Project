@@ -85,14 +85,14 @@ std::vector<RouteModel::Node> RoutePlanner::ConstructFinalPath(RouteModel::Node 
     distance = 0.0f;
     std::vector<RouteModel::Node> path_found;
 
-    path_found.push_back((*current_node));
+    path_found.push_back(*current_node);
 
     // TODO: Implement your solution here.
     while(path_found.back().parent != nullptr){
         distance += path_found.back().distance(*path_found.back().parent);
         path_found.push_back(*path_found.back().parent);
     }
-
+    
     distance *= m_Model.MetricScale(); // Multiply the distance by the scale of the map to get meters.
     std::reverse(path_found.begin(), path_found.end());
     return path_found;
